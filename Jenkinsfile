@@ -6,7 +6,12 @@ pipeline {
             steps{
                 cleanWs()
             }
-        }
+      }
+      stage('Checkout from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Veeresh2708/webapp.git'
+            }
+      }
       stage('Build Artifact') {
             steps {
               sh "mvn clean package -DskipTests=true"
@@ -15,7 +20,7 @@ pipeline {
         }
       stage('Unit Tests') {
             steps {
-              sh "mvn test"
+              sh "mvn test jacoco:report"
             }
             post {
                 always {
