@@ -14,7 +14,7 @@ pipeline {
       }
       stage('Build Artifact') {
             steps {
-              sh "mvn clean package -DskipTests=true"
+              sh "mvn clean package -DskipTests=true jacoco:check"
               archive 'target/*.jar' //so that they can be downloaded later
             }
         }
